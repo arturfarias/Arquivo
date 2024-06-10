@@ -1,0 +1,37 @@
+{
+  "name": "electron-template",
+  "version": "1.0.0",
+  "description": "Simple template with directories and tests for electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "mocha",
+    "make": "node .cli.js command",
+    "doc": "node_modules/jsdoc/jsdoc.js -c jsdoc.json",
+    "builder-linux": "electron-packager . electron-template --overwrite --asar=true --platform=linux --arch=x64 --icon=static/icon.jpg --prune=true --out=release-builds",
+    "make-deb": "electron-installer-debian --src release-builds/electron-template-linux-x64/ --dest release-builds/installers/ --arch amd64",
+    "builder-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=static/icon.icns --prune=true --out=release-builds",
+    "builder-win": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=x64 --icon=static/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"electron-template\""
+  },
+  "repository": "https://github.com/arturfarias/electron-template",
+  "keywords": [
+    "Electron",
+    "template",
+    "directories",
+    "tests"
+  ],
+  "author": "Artur S. Farias",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "chalk": "^3.0.0",
+    "commander": "^4.1.0",
+    "electron": "^15.5.5",
+    "electron-installer-debian": "^3.0.0",
+    "electron-packager": "^14.2.1",
+    "fs": "0.0.1-security",
+    "jsdoc": "^3.6.3",
+    "minimist": "^1.2.5",
+    "mocha": "^7.0.0",
+    "spectron": "^9.0.0"
+  }
+}

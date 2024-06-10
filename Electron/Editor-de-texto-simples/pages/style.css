@@ -1,0 +1,75 @@
+#editor{
+    background-color:white;
+    width: 100%;
+    min-height: 20px;
+    float: right;
+    padding-left: 2px;
+    padding-right: 2px;
+    margin-top: 40px;
+    overflow-y:scroll; 
+}
+
+body{
+    background-color: rgb(223, 223, 223);
+}
+
+footer{
+    float: inline-end;
+    position: fixed;
+    bottom: 0;
+    height: 40px;
+    width: 100%;
+}
+
+.info{
+    float: right;
+    padding-top: 7px;
+    padding-right: 10px;
+}
+
+#footerLines{
+    float: left;
+    padding-top: 7px;
+    padding-left: 3%;
+}
+
+#editor:focus, input:focus, select:focus {
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+} 
+
+#menu{
+    position: fixed;
+    width: 100%;
+    height: 40px;
+}
+
+@font-face {
+    font-family: Arial;
+    src: url(/fonts/Arial.ttf);
+}
+@font-face {
+    font-family: Trebuchet MS;
+    src: url(../static/fonts/trebuchet-ms.ttf);
+}
+
+@font-face {
+    font-family: Calibri;
+    src: url(../static/fonts/Calibri.ttf);
+}
+
+@font-face {
+    font-family: Times New Roman;
+    src: url(../static/fonts/times-new-roman-14.ttf);
+}
+
+@font-face {
+    font-family: Comic Sans MS;
+    src: url(../static/fonts/Comic\ Sans\ MS.ttf);
+}
+
+@font-face {
+    font-family: Impact;
+    src: url(../static/fonts/Impact.ttf);
+}

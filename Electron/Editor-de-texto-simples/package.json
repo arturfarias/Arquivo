@@ -1,0 +1,20 @@
+{
+  "name": "editor_de_texto",
+  "version": "1.0.0",
+  "description": "e bom",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "builder-linux": "electron-packager . editor_de_texto --overwrite --asar=true --platform=linux --arch=x64 --icon=/static/icon.jpg --prune=true --out=release-builds",
+    "make-deb": "electron-installer-debian --src release-builds/editor_de_texto-linux-x64/ --dest dist/installers/ --arch amd64 --icon static/icon.jpg"
+  },
+  "keywords": [],
+  "author": "eu",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^8.2.4",
+    "electron-installer-debian": "^3.0.0",
+    "electron-packager": "^14.2.1"
+  },
+  "dependencies": {}
+}
