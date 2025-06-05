@@ -4,6 +4,12 @@ from fastapi import FastAPI, HTTPException
 
 from fast_zero.schemas import Message, UserDB, UserList, UserPublic, UserSchema
 
+from sqlalchemy import create_engine, select
+from fast_zero.settings import Settings
+from sqlalchemy.orm import Session
+
+from fast_zero.models import User
+
 app = FastAPI()
 
 
@@ -17,11 +23,18 @@ def read_root():
 
 @app.post('/users/', status_code=HTTPStatus.CREATED, response_model=UserPublic)
 def create_user(user: UserSchema):
-    user_with_id = UserDB(id=len(database) + 1, **user.model_dump())
 
-    database.append(user_with_id)
+    engine = create_engine(Settings().DATABASE_URL)
+    session = Session(engine)
 
-    return user_with_id
+    db_user = session.scalar(
+        select(User).where(
+            (User.username == user.username) | (User.email == user.email)
+        )
+    )
+
+
+    
 
 
 @app.get('/users/', status_code=HTTPStatus.OK, response_model=UserList)

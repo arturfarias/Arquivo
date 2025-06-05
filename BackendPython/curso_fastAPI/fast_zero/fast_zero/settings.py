@@ -1,8 +1,10 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
 from pathlib import Path
 
-print("Procurando .env em:", Path(__file__).resolve().parent.parent / '.env')
-print("Existe?", (Path(__file__).resolve().parent.parent / '.env').exists())
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+print('Procurando .env em:', Path(__file__).resolve().parent.parent / '.env')
+print('Existe?', (Path(__file__).resolve().parent.parent / '.env').exists())
+
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
