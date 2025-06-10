@@ -1,13 +1,11 @@
 from http import HTTPStatus
 
-from fastapi import FastAPI, HTTPException, Depends
-
-from fast_zero.schemas import Message, UserDB, UserList, UserPublic, UserSchema
-
+from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy import select
-from fast_zero.database import getSession
 
+from fast_zero.database import get_session
 from fast_zero.models import User
+from fast_zero.schemas import Message, UserDB, UserList, UserPublic, UserSchema
 
 app = FastAPI()
 
@@ -21,10 +19,7 @@ def read_root():
 
 
 @app.post('/users/', status_code=HTTPStatus.CREATED, response_model=UserPublic)
-def create_user(
-    user: UserSchema,
-    session = Depends(getSession)
-):
+def create_user(user: UserSchema, session=Depends(get_session)):
     db_user = session.scalar(
         select(User).where(
             (User.username == user.username) | (User.email == user.email)
@@ -42,7 +37,7 @@ def create_user(
                 status_code=HTTPStatus.CONFLICT,
                 detail='Email Já Existe',
             )
-    
+
     db_user = User(
         username=user.username,
         email=user.email,
@@ -55,12 +50,12 @@ def create_user(
 
     return db_user
 
-    
-
 
 @app.get('/users/', status_code=HTTPStatus.OK, response_model=UserList)
-def read_users():
-    return {'users': database}
+def read_users(limit: int = 10, offset: int = 0, session=Depends(get_session)):
+    users = session.scalars(select(User).limit(limit).offset(offset))
+
+    return {'users': users}
 
 
 @app.put(

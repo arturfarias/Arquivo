@@ -1,7 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import func
-from sqlalchemy import event
+from sqlalchemy import event, func
 from sqlalchemy.orm import Mapped, mapped_column, registry
 
 table_registry = registry()
@@ -23,6 +22,6 @@ class User:
     )
 
 
-@event.listens_for(User, "before_update", propagate=True)
+@event.listens_for(User, 'before_update', propagate=True)
 def timestamp_before_update(mapper, connection, target):
     target.updated_at = datetime.now()
