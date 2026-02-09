@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { Request, Response } from "express";
 
-import TesteParams from "../interfaces/TesteParams"
+import TesteParams from "../interfaces/testeParams"
 import TesteBody from "../interfaces/teste"
 
 const testeRouter  = Router();
