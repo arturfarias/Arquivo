@@ -4,7 +4,9 @@ import { Request, Response } from "express";
 import createInMemoryDatabase from "../fakeDB";
 
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
+
+import authMiddleware from "../middleweres/auth";
 
 import User from "../interfaces/user"
 const userDb = createInMemoryDatabase<User>();
@@ -44,11 +46,16 @@ userRouter.post("/login", async (req: Request, res: Response): Promise<Response>
       return res.status(400).json({ error: "Email ou senha invalidos" });
     }
 
-    const token = jwt.sign({},"dddfdsfds")
+    const token = jwt.sign({id: user.id}, "MuitoSegura", {expiresIn: '8h'})
     
-    return res.status(200).json({});
+    return res.status(200).json({token});
   }
 );
 
+userRouter.get("/teste",authMiddleware ,async (req: Request, res: Response): Promise<Response> => {
+
+    return res.status(200).json("Teste");
+  }
+);
 
 export default userRouter;
