@@ -9,7 +9,7 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
       return res.status(401).json({ error: "Sem autorização" });
     }
 
-    const token = authorization.split(" ")[1];
+    const [type, token] = authorization.split(" ");
 
     jwt.verify(token, "MuitoSegura") as JwtPayload;
 
