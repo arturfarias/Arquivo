@@ -1,10 +1,13 @@
 import express from "express";
+import dotenv from 'dotenv';
 
 import homeRouter from "./routes/home";
 import userRouter from "./routes/user";
 
+dotenv.config();
+
 const app = express()
-const port = 3000
+const port = process.env.PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

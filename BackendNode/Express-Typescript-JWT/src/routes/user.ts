@@ -1,4 +1,5 @@
 import { Router } from "express";
+import dotenv from 'dotenv';
 
 import { Request, Response } from "express";
 import createInMemoryDatabase from "../fakeDB";
@@ -10,6 +11,8 @@ import authMiddleware from "../middleweres/auth";
 
 import User from "../interfaces/user"
 const userDb = createInMemoryDatabase<User>();
+
+dotenv.config();
 
 
 const userRouter  = Router();
@@ -46,7 +49,7 @@ userRouter.post("/login", async (req: Request, res: Response): Promise<Response>
       return res.status(400).json({ error: "Email ou senha invalidos" });
     }
 
-    const token = jwt.sign({id: user.id}, "MuitoSegura", {expiresIn: '8h'})
+    const token = jwt.sign({id: user.id}, process.env.API_KEY ?? "", {expiresIn: '8h'})
     
     return res.status(200).json({token});
   }

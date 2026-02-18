@@ -1,5 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 async function authMiddleware(req: Request, res: Response, next: NextFunction) {
   try {
@@ -11,7 +14,7 @@ async function authMiddleware(req: Request, res: Response, next: NextFunction) {
 
     const [type, token] = authorization.split(" ");
 
-    jwt.verify(token, "MuitoSegura") as JwtPayload;
+    jwt.verify(token, process.env.API_KEY ?? "") as JwtPayload;
 
     return next();
 
