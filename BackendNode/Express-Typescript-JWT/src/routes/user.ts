@@ -1,19 +1,16 @@
 import { Router } from "express";
-import dotenv from 'dotenv';
+import "dotenv/config";
 
 import { Request, Response } from "express";
 import createInMemoryDatabase from "../fakeDB";
 
 import bcrypt from "bcrypt";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 import authMiddleware from "../middleweres/auth";
 
 import User from "../interfaces/user"
 const userDb = createInMemoryDatabase<User>();
-
-dotenv.config();
-
 
 const userRouter  = Router();
 
