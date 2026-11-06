@@ -1,0 +1,30 @@
+[project]
+name = "desafio"
+version = "0.1.0"
+description = "Projeto django feito para o desafio técnico para a empresa ARKO"
+authors = [
+    {name = "Artur S Farias",email = "artur06farias@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13,<4.0"
+dependencies = [
+    "taskipy (>=1.14.1,<2.0.0)",
+    "django (>=5.2.4,<6.0.0)",
+    "psycopg2-binary (>=2.9.10,<3.0.0)",
+    "requests (>=2.32.4,<3.0.0)",
+    "pandas (>=2.3.1,<3.0.0)",
+]
+
+[tool.poetry]
+package-mode = false
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.taskipy.tasks]
+run = 'python manage.py runserver'
+makemigrations = 'python manage.py makemigrations'
+migrate = 'python manage.py migrate'
+ibge = 'python manage.py ibge_import'
+companies = 'python manage.py companies_import'
